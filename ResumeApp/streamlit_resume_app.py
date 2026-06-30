@@ -36,7 +36,16 @@ st.title("🚀 George Adjaidoo")
 st.subheader(
     "Senior Data Engineer | Microsoft Fabric | Databricks | Azure | SQL"
 )
+resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
 
+with open(resume_file, "rb") as pdf_file:
+    st.download_button(
+        "📄 Download Resume",
+        pdf_file,
+        file_name="George_Adjaidoo_Resume.pdf",
+        mime="application/pdf",
+        type="primary"
+    )
 st.markdown("""
 📧 gadjaidoo@gmail.com  
 📞 301-452-2385  
