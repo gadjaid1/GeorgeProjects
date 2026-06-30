@@ -3,6 +3,25 @@ import pandas as pd
 from datetime import date
 
 st.set_page_config(page_title="Enhanced Loan Payoff Analysis", layout="wide")
+st.markdown("""
+<style>
+[data-testid="stMetricLabel"] {
+    font-size: 18px;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 26px;
+}
+
+h1 {
+    font-size: 45px !important;
+}
+
+h2 {
+    font-size: 23px !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🚀 GEORGE STREAMLIT V2")
 st.success("Enhanced Loan Payoff Analysis + Slider Version") 
