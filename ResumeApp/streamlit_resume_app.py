@@ -3,11 +3,11 @@ from pathlib import Path
 import os
 
 
-st.write("Current Directory:")
-st.write(os.getcwd())
+# st.write("Current Directory:")
+# st.write(os.getcwd())
 
-st.write("Files in current directory:")
-st.write(os.listdir("."))
+# st.write("Files in current directory:")
+# st.write(os.listdir("."))
 
 
 # st.write(os.getcwd())
