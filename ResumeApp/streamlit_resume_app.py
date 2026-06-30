@@ -329,18 +329,30 @@ elif page == "Education":
 #         )
 
 
-resume_file = Path("George_Adjaidoo_Resume.pdf")
+# resume_file = Path("George_Adjaidoo_Resume.pdf")
 
-st.write("Current Directory:", Path.cwd())
-st.write("Files:", list(Path.cwd().iterdir()))
+# st.write("Current Directory:", Path.cwd())
+# st.write("Files:", list(Path.cwd().iterdir()))
 
-if resume_file.exists():
-    with open(resume_file, "rb") as pdf_file:
-        st.download_button(
-            "📄 Download Resume",
-            pdf_file,
-            file_name="George_Adjaidoo_Resume.pdf",
-            mime="application/pdf"
-        )
-else:
-    st.error(f"Resume not found: {resume_file}")
+# if resume_file.exists():
+#     with open(resume_file, "rb") as pdf_file:
+#         st.download_button(
+#             "📄 Download Resume",
+#             pdf_file,
+#             file_name="George_Adjaidoo_Resume.pdf",
+#             mime="application/pdf"
+#         )
+# else:
+#     st.error(f"Resume not found: {resume_file}")
+
+# from pathlib import Path
+
+resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
+
+with open(resume_file, "rb") as pdf_file:
+    st.download_button(
+        "📄 Download Resume",
+        pdf_file,
+        file_name="George_Adjaidoo_Resume.pdf",
+        mime="application/pdf"
+    )
