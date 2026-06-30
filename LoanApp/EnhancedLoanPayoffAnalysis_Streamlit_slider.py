@@ -530,12 +530,19 @@ try:
     )
 
     st.subheader("Loan Position")
-    col1, col2, col3, col4 = st.columns(4)
+    loan_progress_pct = round(
+        (
+            (original_loan_amount - outstanding_loan_amount)
+            / original_loan_amount
+        ) * 100,
+        1
+    )
+    col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("Current Month", result["Current Month"])
     col2.metric("Months Completed", result["Months Completed"])
     col3.metric("Remaining Term", result["Remaining Term Months"])
     col4.metric("Loan Start Date", str(result["Loan Start Date"]))
-
+    col5.metric("Loan Progress", f"{loan_progress_pct}%")
     st.subheader("Scenario Summary")
 
     base = result["Baseline"]
@@ -552,12 +559,43 @@ try:
         st.metric("Remaining Interest", format_currency(base["Total Interest"]))
         st.metric("Total Remaining Paid", format_currency(base["Total Paid"]))
 
+    # with col2:
+    #     st.markdown("### Fixed Extra")
+    #     st.metric("Payment", format_currency(fixed["Payment Amount"]))
+    #     st.metric("Fixed Extra Payment", format_currency(fixed["Payment Amount"]))
+    #     st.metric("Payoff Date", str(fixed["Payoff Date"]))
+    #     st.metric("Months Saved", result["Fixed Months Saved"])
+    #     st.metric("Interest Saved", format_currency(result["Fixed Interest Saved"]))
+        
+        
     with col2:
         st.markdown("### Fixed Extra")
-        st.metric("Payment", format_currency(fixed["Payment Amount"]))
-        st.metric("Payoff Date", str(fixed["Payoff Date"]))
-        st.metric("Months Saved", result["Fixed Months Saved"])
-        st.metric("Interest Saved", format_currency(result["Fixed Interest Saved"]))
+
+        st.metric(
+            "Monthly Payment",
+            format_currency(fixed["Payment Amount"])
+        )
+
+        st.metric(
+            "Extra Payment",
+            format_currency(result["Extra Payment"])
+        )
+
+        st.metric(
+            "Payoff Date",
+            str(fixed["Payoff Date"])
+        )
+
+        st.metric(
+            "Months Saved",
+            result["Fixed Months Saved"]
+        )
+
+        st.metric(
+            "Interest Saved",
+            format_currency(result["Fixed Interest Saved"])
+        )
+
 
     with col3:
         st.markdown("### Required Target")
