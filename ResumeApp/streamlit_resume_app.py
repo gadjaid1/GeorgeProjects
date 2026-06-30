@@ -1,5 +1,5 @@
 import streamlit as st
-
+from pathlib import Path
 st.set_page_config(
     page_title="George Adjaidoo",
     page_icon="🚀",
@@ -278,14 +278,36 @@ elif page == "Education":
 #         file_name="George_Adjaidoo_Resume.pdf",
 #         mime="application/pdf"
 #     )
+# elif page == "Resume":
+
+#     st.title("Resume")
+
+#     with open("George_Adjaidoo_Resume.pdf", "rb") as pdf_file:
+#         st.download_button(
+#             label="📄 Download Resume",
+#             data=pdf_file,
+#             file_name="George_Adjaidoo_Resume.pdf",
+#             mime="application/pdf"
+#         )
+
+
 elif page == "Resume":
 
     st.title("Resume")
 
-    with open("George_Adjaidoo_Resume.pdf", "rb") as pdf_file:
-        st.download_button(
-            label="📄 Download Resume",
-            data=pdf_file,
-            file_name="George_Adjaidoo_Resume.pdf",
-            mime="application/pdf"
+    resume_file = Path("George_Adjaidoo_Resume.pdf")
+
+    if resume_file.exists():
+
+        with open(resume_file, "rb") as pdf_file:
+            st.download_button(
+                label="📄 Download Resume",
+                data=pdf_file,
+                file_name="George_Adjaidoo_Resume.pdf",
+                mime="application/pdf"
+            )
+
+    else:
+        st.warning(
+            "Resume PDF not found. Upload George_Adjaidoo_Resume.pdf to the repository."
         )
