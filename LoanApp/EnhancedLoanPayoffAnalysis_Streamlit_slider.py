@@ -136,7 +136,8 @@ def run_analysis(
     original_term_months,
     as_of_date,
     target_payoff_date,
-    slider_payment=None
+    slider_payment=None,
+    show_full_history=False
 ):
     target_date_specified = target_payoff_date is not None
 
@@ -150,22 +151,29 @@ def run_analysis(
 
     months_completed = current_month - 1
     remaining_term_months = original_term_months - current_month + 1
+    
+    if show_full_history:
+        schedule_start_month = 1
+        schedule_start_balance = original_loan_amount
+    else:
+        schedule_start_month = current_month
+        schedule_start_balance = outstanding_loan_amount
 
     baseline_payment = standard_payment
     fixed_extra_payment = round(standard_payment + extra_payment, 2)
 
     baseline = build_schedule(
-        current_month,
+        schedule_start_month,
         loan_start_date,
-        outstanding_loan_amount,
+        schedule_start_balance,
         annual_rate,
         baseline_payment
     )
 
     fixed_extra = build_schedule(
-        current_month,
+        schedule_start_month,
         loan_start_date,
-        outstanding_loan_amount,
+        schedule_start_balance,
         annual_rate,
         fixed_extra_payment
     )
@@ -197,9 +205,9 @@ def run_analysis(
         )
 
         target = build_schedule(
-            current_month,
+            schedule_start_month,
             loan_start_date,
-            outstanding_loan_amount,
+            schedule_start_balance,
             annual_rate,
             required_target_payment
         )
@@ -207,9 +215,9 @@ def run_analysis(
 
         if slider_payment is not None:
             slider = build_schedule(
-                current_month,
+                schedule_start_month,
                 loan_start_date,
-                outstanding_loan_amount,
+                schedule_start_balance,
                 annual_rate,
                 slider_payment
             )
@@ -382,6 +390,11 @@ with st.sidebar:
         value=date.today()
     )
 
+    show_full_history = st.checkbox(
+        "Show Full Loan History",
+        value=False
+    )
+
     use_target_date = st.checkbox(
         "Calculate payment needed for target payoff date",
         value=True
@@ -493,7 +506,8 @@ try:
         original_term_months=original_term_months,
         as_of_date=as_of_date,
         target_payoff_date=target_payoff_date,
-        slider_payment=slider_payment
+        slider_payment=slider_payment,
+        show_full_history=show_full_history
     )
 
     st.subheader("Loan Position")
@@ -597,6 +611,7 @@ try:
         file_name="loan_payoff_schedule_with_slider.csv",
         mime="text/csv"
     )
+    
 
 except Exception as exc:
     st.error(str(exc))
