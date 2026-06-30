@@ -279,7 +279,7 @@ elif page == "Education":
 # RESUME
 # ==================================================
 
-# elif page == "Resume":
+elif page == "Resume":
 
 #     st.title("Resume")
 
@@ -347,12 +347,12 @@ elif page == "Education":
 
 # from pathlib import Path
 
-resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
-
-with open(resume_file, "rb") as pdf_file:
-    st.download_button(
-        "📄 Download Resume",
-        pdf_file,
-        file_name="George_Adjaidoo_Resume.pdf",
-        mime="application/pdf"
-    )
+    resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
+    
+    with open(resume_file, "rb") as pdf_file:
+        st.download_button(
+            "📄 Download Resume",
+            pdf_file,
+            file_name="George_Adjaidoo_Resume.pdf",
+            mime="application/pdf"
+        )
