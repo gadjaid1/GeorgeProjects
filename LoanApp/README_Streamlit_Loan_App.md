@@ -3,8 +3,9 @@
 ## Run locally
 
 ```bash
+cd LoanApp
 pip install -r requirements.txt
-streamlit run streamlit_app.py
+streamlit run EnhancedLoanPayoffAnalysis_Streamlit_slider.py
 ```
 
 ## New feature
