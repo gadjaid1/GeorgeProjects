@@ -264,17 +264,28 @@ elif page == "Education":
 # RESUME
 # ==================================================
 
+# elif page == "Resume":
+
+#     st.title("Resume")
+
+#     st.info(
+#         "Upload your PDF resume to the repository and enable download here."
+#     )
+
+#     st.download_button(
+#         label="Download Resume",
+#         data=b"Upload your PDF resume first",
+#         file_name="George_Adjaidoo_Resume.pdf",
+#         mime="application/pdf"
+#     )
 elif page == "Resume":
 
     st.title("Resume")
 
-    st.info(
-        "Upload your PDF resume to the repository and enable download here."
-    )
-
-    st.download_button(
-        label="Download Resume",
-        data=b"Upload your PDF resume first",
-        file_name="George_Adjaidoo_Resume.pdf",
-        mime="application/pdf"
-    )
+    with open("George_Adjaidoo_Resume.pdf", "rb") as pdf_file:
+        st.download_button(
+            label="📄 Download Resume",
+            data=pdf_file,
+            file_name="George_Adjaidoo_Resume.pdf",
+            mime="application/pdf"
+        )
