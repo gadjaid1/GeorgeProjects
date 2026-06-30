@@ -2,10 +2,18 @@ import streamlit as st
 from pathlib import Path
 import os
 
+
+st.write("Current Directory:")
 st.write(os.getcwd())
+
+st.write("Files in current directory:")
 st.write(os.listdir("."))
 
 
+# st.write(os.getcwd())
+# st.write(os.listdir("."))
+
+# st.write(os.listdir("ResumeApp"))
 
 st.set_page_config(
     page_title="George Adjaidoo",
@@ -298,23 +306,41 @@ elif page == "Education":
 #         )
 
 
-elif page == "Resume":
+# elif page == "Resume":
 
-    st.title("Resume")
+#     st.title("Resume")
 
-    resume_file = Path("George_Adjaidoo_Resume.pdf")
+#     resume_file = Path("George_Adjaidoo_Resume.pdf")
+#     # resume_file = Path("ResumeApp/George_Adjaidoo_Resume.pdf")
 
-    if resume_file.exists():
+#     if resume_file.exists():
 
-        with open(resume_file, "rb") as pdf_file:
-            st.download_button(
-                label="📄 Download Resume",
-                data=pdf_file,
-                file_name="George_Adjaidoo_Resume.pdf",
-                mime="application/pdf"
-            )
+#         with open(resume_file, "rb") as pdf_file:
+#             st.download_button(
+#                 label="📄 Download Resume",
+#                 data=pdf_file,
+#                 file_name="George_Adjaidoo_Resume.pdf",
+#                 mime="application/pdf"
+#             )
 
-    else:
-        st.warning(
-            "Resume PDF not found. Upload George_Adjaidoo_Resume.pdf to the repository."
+#     else:
+#         st.warning(
+#             "Resume PDF not found. Upload George_Adjaidoo_Resume.pdf to the repository."
+#         )
+
+
+resume_file = Path("George_Adjaidoo_Resume.pdf")
+
+st.write("Current Directory:", Path.cwd())
+st.write("Files:", list(Path.cwd().iterdir()))
+
+if resume_file.exists():
+    with open(resume_file, "rb") as pdf_file:
+        st.download_button(
+            "📄 Download Resume",
+            pdf_file,
+            file_name="George_Adjaidoo_Resume.pdf",
+            mime="application/pdf"
         )
+else:
+    st.error(f"Resume not found: {resume_file}")
