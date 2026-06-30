@@ -537,12 +537,13 @@ try:
         ) * 100,
         1
     )
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     col1.metric("Current Month", result["Current Month"])
     col2.metric("Months Completed", result["Months Completed"])
     col3.metric("Remaining Term", result["Remaining Term Months"])
     col4.metric("Loan Start Date", str(result["Loan Start Date"]))
     col5.metric("Loan Progress", f"{loan_progress_pct}%")
+    col6.metric("Original Loan", format_currency(result["Original Loan Amount"]))
     st.subheader("Scenario Summary")
 
     base = result["Baseline"]
@@ -579,6 +580,7 @@ try:
         st.metric(
             "Extra Payment",
             format_currency(result["Extra Payment"])
+            
         )
 
         st.metric(
