@@ -1,5 +1,12 @@
 import streamlit as st
 from pathlib import Path
+import os
+
+st.write(os.getcwd())
+st.write(os.listdir("."))
+
+
+
 st.set_page_config(
     page_title="George Adjaidoo",
     page_icon="🚀",
