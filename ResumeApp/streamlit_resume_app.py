@@ -33,24 +33,57 @@ h2 {
 
 st.title("🚀 George Adjaidoo")
 
+
 st.subheader(
     "Senior Data Engineer | Microsoft Fabric | Databricks | Azure | SQL"
 )
 resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
 
+
 with open(resume_file, "rb") as pdf_file:
     st.download_button(
-        "📄 Download Resume",
-        pdf_file,
+        label="📄 DOWNLOAD RESUME",
+        data=pdf_file,
         file_name="George_Adjaidoo_Resume.pdf",
         mime="application/pdf",
-        type="primary"
+        type="primary",
+        # use_container_width=True
     )
+st.caption("PDF Resume • Updated June 2026")
+# with open(resume_file, "rb") as pdf_file:
+#     st.download_button(
+#         "📄 Download Resume",
+#         pdf_file,
+#         file_name="George_Adjaidoo_Resume.pdf",
+#         mime="application/pdf",
+#         type="primary"
+#     )
+
+# st.markdown("""
+# 📧 gadjaidoo@gmail.com  
+# 📞 301-452-2385  
+# 🔗 LinkedIn: linkedin.com/in/george-a-7861428b
+# """)
+
+# st.markdown("""
+# ### Contact
+
+# 📧 **Email:** gadjaidoo@gmail.com
+
+# 📞 **Phone:** 301-452-2385
+
+# 🔗 **LinkedIn:** [View LinkedIn](https://linkedin.com/in/george-a-7861428b)
+
+# 💻 **GitHub:** [View GitHub](https://github.com/gadjaid1)
+# """)
+
 st.markdown("""
-📧 gadjaidoo@gmail.com  
-📞 301-452-2385  
-🔗 LinkedIn: linkedin.com/in/george-a-7861428b
+📧 **gadjaidoo@gmail.com** |
+📞 **301-452-2385** |
+🔗 [LinkedIn](https://linkedin.com/in/george-a-7861428b) |
+💻 [GitHub](https://github.com/gadjaid1)
 """)
+
 
 st.divider()
 
@@ -63,7 +96,7 @@ col1, col2, col3, col4 = st.columns(4)
 col1.metric("Experience", "16+ Years")
 col2.metric("Current Role", "Sr Software Engineer")
 col3.metric("Education", "MS IT 2026")
-col4.metric("Focus", "Data Engineering")
+col4.metric("Specialty", "Data Engineering")
 
 st.divider()
 
@@ -201,6 +234,46 @@ with col2:
     • SSRS
     """)
 
+st.markdown("""
+### Core Technologies
+
+`Microsoft Fabric`
+`Azure Data Factory`
+`Databricks`
+`Snowflake`
+`SQL Server`
+`Python`
+`Terraform`
+`Power BI`
+`Tableau`
+`PowerShell`
+`T-SQL`
+""")
+st.header("Featured Applications")
+
+st.subheader("💰 Loan Payoff Analysis Planner")
+
+st.write("""
+Interactive Streamlit application for:
+
+• Payoff forecasting
+
+• Target payoff dates
+
+• Payment optimization
+
+• Interest savings analysis
+
+• Interactive sliders
+
+• CSV export
+""")
+
+st.link_button(
+    "🚀 Open Loan Planner",
+    "https://loanappenhancedloanpayoffanalysis-streamlit-slid-8frzao.streamlit.app/"
+)
+
 # =====================================================
 # EDUCATION
 # =====================================================
@@ -239,24 +312,6 @@ st.write("""
 
 st.header("Featured Projects")
 
-st.subheader("💰 Loan Payoff Analysis Application")
-
-st.write("""
-Interactive Streamlit application featuring:
-
-• Target payoff analysis
-
-• Payment optimization
-
-• Interactive sliders
-
-• Balance forecasting
-
-• Interest savings analysis
-
-• CSV export
-""")
-
 st.subheader("📊 Microsoft Fabric Data Engineering")
 
 st.write("""
@@ -279,16 +334,31 @@ Enterprise data engineering solutions utilizing:
 
 st.divider()
 
-st.header("Resume Download")
+# st.header("Resume Download")
 
-resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
+# resume_file = Path(__file__).parent / "George_Adjaidoo_Resume.pdf"
+
+# with open(resume_file, "rb") as pdf_file:
+#     st.download_button(
+#         "📄 Download PDF Resume",
+#         pdf_file,
+#         file_name="George_Adjaidoo_Resume.pdf",
+#         mime="application/pdf"
+#     )
+
+# st.success("Thank you for visiting my profile.")
+# st.divider()
+
+st.success(
+    "Interested in Microsoft Fabric, Data Engineering, or Cloud Architecture? Download my resume below."
+)
 
 with open(resume_file, "rb") as pdf_file:
     st.download_button(
-        "📄 Download PDF Resume",
+        "⬇️ DOWNLOAD PDF RESUME",
         pdf_file,
         file_name="George_Adjaidoo_Resume.pdf",
-        mime="application/pdf"
+        mime="application/pdf",
+        type="primary",
+        use_container_width=True
     )
-
-st.success("Thank you for visiting my profile.")
