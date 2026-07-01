@@ -404,6 +404,11 @@ st.subheader("Scenario Comparison")
 c1, c2, c3, c4 = st.columns(4)
 
 with c1:
+    
+    baseline_months = baseline["Payoff Month"]
+
+    baseline_years = baseline_months // 12
+    baseline_remaining_months = baseline_months % 12
 
     st.markdown("### Baseline")
 
@@ -418,7 +423,10 @@ with c1:
         "Payoff Date",
         str(baseline["Payoff Date"])
     )
-
+    st.metric(
+        "Payoff Term",
+        f"{baseline_years}y {baseline_remaining_months}m"
+    )
     st.metric(
         "Total Interest",
         format_currency(
@@ -430,11 +438,30 @@ with c2:
 
     st.markdown("### Extra Payment")
 
+    payoff_months = extra_schedule["Payoff Month"]
+
+    payoff_years = payoff_months // 12
+    remaining_months = payoff_months % 12
+
     st.metric(
         "Payment",
         format_currency(
             extra_schedule["Payment Amount"]
         )
+    )
+    st.metric(
+        "Additional Payment",
+        format_currency(extra_payment)
+    )
+
+    st.metric(
+        "Payoff Date",
+        str(extra_schedule["Payoff Date"])
+    )
+
+    st.metric(
+        "Payoff Term",
+        f"{payoff_years}y {remaining_months}m"
     )
 
     st.metric(
@@ -452,7 +479,15 @@ with c2:
     )
 
 if target_schedule:
+    target_months = target_schedule["Payoff Month"]
 
+    target_years = target_months // 12
+    target_remaining_months = target_months % 12
+    
+    target_met = (
+    target_schedule["Payoff Date"]
+    <= target_date
+    )
     with c3:
 
         st.markdown("### Target Date")
@@ -463,42 +498,58 @@ if target_schedule:
                 required_payment
             )
         )
-
+        
         st.metric(
-            "Required Extra",
-            format_currency(
-                required_extra
-            )
+            "Additional Payment",
+            format_currency(required_extra)
         )
 
         st.metric(
             "Payoff Date",
             str(target_schedule["Payoff Date"])
         )
+        st.metric(
+            "Payoff Term",
+            f"{target_years}y {target_remaining_months}m"
+        )
+        st.metric(
+            "Target Achieved",
+            "✅ YES" if target_met else "❌ NO"
+        )
+ 
+
 
 if slider_schedule:
 
-    target_met = (
-        slider_schedule["Payoff Date"]
-        <= target_date
-    )
+    
 
     months_saved = (
         baseline["Payoff Month"]
         - slider_schedule["Payoff Month"]
     )
-
-    years_saved = months_saved // 12
-    remaining_months = months_saved % 12
     
-    payoff_months = slider_schedule["Payoff Month"]
+    
+       
 
-    payoff_years = payoff_months // 12
-    remaining_months = payoff_months % 12
-
+     
     with c4:
 
         st.markdown("### Slider Test")
+
+        target_met = (
+            slider_schedule["Payoff Date"]
+            <= target_date
+        )
+
+        slider_extra = round(
+            slider_payment - monthly_payment,
+            2
+        )
+
+        payoff_months = slider_schedule["Payoff Month"]
+
+        payoff_years = payoff_months // 12
+        remaining_months = payoff_months % 12
 
         st.metric(
             "Payment",
@@ -506,13 +557,20 @@ if slider_schedule:
         )
 
         st.metric(
+            "Additional Payment",
+            format_currency(slider_extra)
+        )
+
+        st.metric(
             "Payoff Date",
             str(slider_schedule["Payoff Date"])
         )
+
         st.metric(
             "Payoff Term",
-            f"{payoff_years} Years {remaining_months} Months"
+            f"{payoff_years}y {remaining_months}m"
         )
+
         st.metric(
             "Target Achieved",
             "✅ YES" if target_met else "❌ NO"
@@ -520,12 +578,8 @@ if slider_schedule:
 
         st.metric(
             "Months Saved",
-            months_saved
-        )
-
-        st.metric(
-            "Years Saved",
-            f"{years_saved}y {remaining_months}m"
+            baseline["Payoff Month"]
+            - slider_schedule["Payoff Month"]
         )
 
         st.metric(
@@ -535,7 +589,6 @@ if slider_schedule:
                 - slider_schedule["Total Interest"]
             )
         )
-        
   
 
 
