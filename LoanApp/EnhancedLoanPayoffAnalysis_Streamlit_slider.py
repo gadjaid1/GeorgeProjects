@@ -2,6 +2,17 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 
+
+'''For existing loans
+
+Uses:
+• Current Balance
+• Current Payment
+• Maturity Date
+
+Optimizes payoff strategy'''
+
+
 st.set_page_config(page_title="Enhanced Loan Payoff Analysis", layout="wide")
 st.markdown("""
 <style>
